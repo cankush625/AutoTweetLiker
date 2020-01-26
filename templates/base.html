@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}
+        
+        {% endblock %}
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+        <link rel="stylesheet" type="text/css" href="{% static 'resources/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendors/css/materialize.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'vendors/css/Grid.css' %}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://unpkg.com/ionicons@4.4.7/dist/css/ionicons.min.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        {% block content %}
+        
+        {% endblock %}
+        <footer class="page-footer" style="margin-top: 40vh">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Auto Tweet Liker</h5>
+                <li><a class="grey-text text-lighten-3" href="#!">Know us</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Help &amp; support</a></li>
+                <li><a class="grey-text text-lighten-3" href="#!">Privacy Notice</a></li>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Follow us</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!"><i class="ion-logo-facebook"></i>&nbsp;&nbsp; Facebook</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><i class="ion-logo-twitter"></i>&nbsp;&nbsp; Twitter</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><i class="ion-logo-googleplus"></i>&nbsp;&nbsp; Google Plus</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!"><i class="ion-logo-instagram"></i>&nbsp;&nbsp; Instagram</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            &copy; 2020, AutoTweetLiker or its affiliates
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+    </body>
+    <script type="text/javascript" src="{% static 'resources/js/script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'resources/js/query.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/js/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/js/jquery-3.4.1.min.js' %}"></script>
+</html>
