@@ -14,7 +14,7 @@
                             <li><a href="{% url 'index' %}" class="nav-links">Home</a></li>
                             <li><a href="#" class="nav-links">Getting started</a></li>
                             <li><a href="#" class="nav-links">Features</a></li>
-                            <li><a href="logout" class="nav-links">Logout</a></li>
+                            <li><a href="#" class="nav-links">Login & Signup</a></li>
                             <li style="margin-left: 25vw"><a href="#"><i class = "material-icons tiny">search</i></a></li>
                             <li><a href="#"><i class = "material-icons tiny">account_circle</i></a></li>
                         </ul>
@@ -23,11 +23,11 @@
             </nav>
 
             <body>
-                <form action="like" method="post" style="margin-top: 40vh; margin-left: 20vw; margin-right: 20vw;">
-                    {% csrf_token %}
-                    <input type="text" name="search" placeholder="Keyword to search the tweets"><br>
-                    <input type="submit" class = "waves-effect waves-light btn-large" style="margin-left: 45%;">
-                </form>
+                {% block info %}
+                    <h2 style:"margin-left: 20%">User info</h2>
+                    <img src="{{user.profile_image_url}}">
+                    <h3>{{user.name}}</h3>
+                {% endblock %}
             </body>
         </header>
         {% endblock %}

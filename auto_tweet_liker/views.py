@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.urls import reverse
 from django.contrib.auth import logout
 from django.contrib import messages
-from auto_tweet_liker.utils import * 
+from auto_tweet_liker.utils import *
 # from profanityfilter import ProfanityFilter
 import tweepy
 import time
@@ -13,23 +13,17 @@ import os
 
 def index(request):
     # return render(request, "index.html")
-    if check_key(request):
-        return render(request, 'index.html')
-    else:
-        return render_to_response('login.html')
+	if check_key(request):
+		return render(request, 'index.html')
+	else:
+		return render_to_response('login.html')
 
 def like(request):
     counter = 0
 
     keyword = request.POST['search']
 
-    # Providing tweeter API keys for accessing the API data
-    # 'IeGj41fptB', 'rJiYi0wtXYvqd8RUx9medcP'
-
-    # Adding access tokens for the tweeter account
-    # '873755259780386816-lYaAmRQPoE9', 'qvwPKIUWavNQD2F8NKhbj9yd'
-    # if check_key(request):
-    api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+    api = get_api(request)
 
     # Getting the user
     user = api.me()
@@ -88,15 +82,35 @@ def callback(request):
 	response = HttpResponseRedirect(reverse('index'))
 	return response
 
+def unauth(request):
+	"""
+	logout and remove all session data
+	"""
+	if check_key(request):
+		api = get_api(request)
+		request.session.clear()
+		logout(request)
+	return render(request, "login.html")
+
 def check_key(request):
+        """
+        Checking if we already have an access_key stored. If yes, it means we had already been authorized.
+        If not, the we have to authorize ourself first
 	"""
-	Check to see if we already have an access_key stored, if we do then we have already gone through
-	OAuth. If not then we haven't and we probably need to.
-	"""
-	try:
-		access_key = request.session.get('access_key_tw', None)
-		if not access_key:
-			return False
-	except KeyError:
-		return False
-	return True
+        try:
+                access_key = request.session.get('access_key_tw', None)
+                if not access_key:
+                        return False
+        except KeyError:
+                return False
+        return True
+
+	# User info
+def info(request):
+	print(check_key)
+	if check_key(request):
+		api = get_api(request)
+		user = api.me()
+		return render_to_response('info.html', {'user' : user})
+	else:
+		return HttpResponseRedirect(reverse('index'))
