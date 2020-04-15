@@ -1,0 +1,13 @@
+version: '3'
+
+services: 
+    web:
+        build: .
+        # Exporting CONSUMER KEY and CONSUMER SECRET key from tweeter api as an environment variable
+        command: sh -c "export CONS_KEY=""
+            && export CONS_SECRET=""
+            && python manage.py runserver 0.0.0.0:8000"
+        volumes: 
+            - .:/code
+        ports: 
+            - "8000:8000"
